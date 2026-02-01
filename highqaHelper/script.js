@@ -4,6 +4,8 @@ const sampleInput = document.getElementById("sampleInput");
 const singleForm = document.getElementById("singleForm");
 const multiForm = document.getElementById("multiForm");
 
+const resetButton = document.getElementById("resetButton");
+
 const baseUrl = "https://highqaim:4085/dims/?";
 const multiBaseUrl = "https://highqaim:4085/dimsmulti/?";
 const staticParams = {};
@@ -56,6 +58,14 @@ multiForm.addEventListener("submit", function(e){
     }
     
 });
+
+resetButton.addEventListener("click", function(e){
+    e.preventDefault();
+    localStorage.clear();
+    urlInput.value = "";
+    sampleInput.value = "";
+
+})
 
 function checkInputs(){
         //check that user has filled out header form
