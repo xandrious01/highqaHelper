@@ -12,6 +12,13 @@ const staticParams = {};
 const testUrl = "https://highqaim:4085/dims/?partid=27286&instid=1465135&jobid=33769&lotid=-1#";
 const testSample = 1;
 
+window.onload = () => {
+    const prevUrl = localStorage.getItem('url') ? localStorage.getItem('url') : false;
+    if (prevUrl) urlInput.value = prevUrl;
+    const prevSample = localStorage.getItem('sampleNum') ? localStorage.getItem('sampleNum') : false;
+    if (prevSample) sampleInput.value = prevSample;
+}
+
 singleForm.addEventListener("submit", function(e){
     e.preventDefault();
     checkHideError();
@@ -53,8 +60,9 @@ multiForm.addEventListener("submit", function(e){
 function checkInputs(){
         //check that user has filled out header form
         // if correct, send inputs to be parsed
-    const url = urlInput.value;
+    const url = urlInput.value.trim();
     const sample = sampleInput.value;
+    saveToLocal(url, sample);
     const difference = (url === undefined) || (sample === undefined) ? showErrorMsg() : parseInputs(url, sample);
     return difference;
 }
@@ -146,6 +154,11 @@ function checkHideError(){
     
 }
 
+
+function saveToLocal(url, sample){
+    localStorage.setItem('url', url);
+    localStorage.setItem('sampleNum', sample);
+}
 
 
 
