@@ -11,34 +11,39 @@
    
 </head>
 
-<body style="background-color: darkslategray;">
-    <div class="container">
-        <div class="header row p-3">
-            <h4>This tool can help you generate HighQA URLs so that you can bypass pages that load slowly. You will need the URL for one of your samples, as well as the sample number for that URL.</h1>
+<body id="body">
+    <div class="container m-5 p-1">
+        <div class="header row p-3 mt-5">
+            <h3>This tool can help you generate HighQA URLs for faster navigation. You will need the URL for one of your samples, as well as the sample number for that URL.</h3>
+            <h4 class="mt-3">In order for the links to work, please make sure you are currently logged into HighQA.</h4>
+
         </div>
 
-       <div class="row p-3">
+       <div class="row p-3 mt-4">
+                <div>
                     <label for="urlInput" class="form-label">Please input the url for a single sample check:</label>
                     <input type="text" id="urlInput" class="urlInput form-control">
+                </div>
+                    
                 <div class="col-sm">
                     <label for="sampleInput" class="form-label">Please input the sample number for the provided url:</label>
                     <input type="number" id="sampleInput" class="sampleInput form-control">
                 </div>
                 
                 <div class="col-sm">
-                    <button id="resetButton" class="btn btn-dark">Clear All</button>
+                    <button id="resetButton" class="btn btn-dark mt-3">Clear All</button>
                 </div>
            </div>
            <div class="invisible" id="errorMsg"><p>Please check your inputs and try again</p></div>
        
-        <div class="row">
+        <div class="row m-0">
         <div class="col">
             <div class="single-form-div">
                 <p>To access a single sample check, use this side.</p>
                 <form class="form" id="singleForm">
                     <label for="singleSample" class="form-label">Please provide the desired sample number:</label>
                         <input type="number" id="singleSample" class="sampleInput form-control">
-                    <button type="submit" id="singleFormSubmit" class="btn btn-dark">Make my URL</button>    
+                    <button type="submit" id="singleFormSubmit" class="btn btn-dark mt-3">Make my URL</button>    
                 </form>
             </div>
                 <div class="output">
@@ -53,7 +58,7 @@
                         <input type="number" id="multiFormFirst" class="sampleInput form-control">
                     <label for="multiFormLast" class="form-label">Provide the last sample number here:</label>
                         <input type="number" id="multiFormLast" class="sampleInput form-control">
-                    <button type="submit" id="multiFormSubmit" class="btn btn-dark">Make my URL</button>  
+                    <button type="submit" id="multiFormSubmit" class="btn btn-dark mt-3">Make my URL</button>  
                 </form>
             </div>
                 <div class="output">

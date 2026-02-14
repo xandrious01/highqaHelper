@@ -1,3 +1,7 @@
+#body {
+    background-color: #30393D;
+}
+
 .output-link {
     color: red;
 }
@@ -18,3 +22,12 @@
 
 #singleSample{
     width: 150px;
+}
+
+#errorMsg {
+    color: red;
+}
+
+*{
+    color: white;
+}

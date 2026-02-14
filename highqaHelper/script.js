@@ -132,6 +132,7 @@ function updateUiSingle(singleSample, outputUrl){
     //create <a> object for index page
     singleFormOutput.innerText=`The URL for sample ${singleSample} is:`;
     singleFormOutput.appendChild(link);
+    singleFormOutput.className="mt-3"
 };
 
 function updateUiMulti(rangeStart, rangeEnd, outputUrl){
@@ -139,6 +140,7 @@ function updateUiMulti(rangeStart, rangeEnd, outputUrl){
     const link = createDocumentLink(outputUrl)
     multiFormOutput.innerText=`The URL for samples ${rangeStart}-${rangeEnd} is:`;
     multiFormOutput.appendChild(link);
+    multiFormOutput.className="mt-3"
 };
 
 
