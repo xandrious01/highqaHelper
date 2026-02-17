@@ -1,5 +1,6 @@
 const urlInput = document.getElementById("urlInput");
 const sampleInput = document.getElementById("sampleInput");
+const stepInput = document.getElementById("stepInput");
 
 const singleForm = document.getElementById("singleForm");
 const multiForm = document.getElementById("multiForm");
@@ -19,13 +20,15 @@ window.onload = () => {
     if (prevUrl) urlInput.value = prevUrl;
     const prevSample = localStorage.getItem('sampleNum') ? localStorage.getItem('sampleNum') : false;
     if (prevSample) sampleInput.value = prevSample;
+    const prevStep = localStorage.getItem('step') ? localStorage.getItem('step') : 1;
+    if (prevStep) stepInput.value = prevStep;
 }
 
 singleForm.addEventListener("submit", function(e){
     e.preventDefault();
     checkHideError();
     //check if error message is visible, hide if it is until triggered again
-    const difference = checkInputs();
+    const { difference, step } = checkInputs();
     //at this point, we should have the staticParams object filled out and a 'difference' value for instId calculation
     //gather desired sample number from single input form, handle form submission
     let singleSample = document.getElementById("singleSample").value;
@@ -44,7 +47,7 @@ singleForm.addEventListener("submit", function(e){
 multiForm.addEventListener("submit", function(e){
     e.preventDefault();
     checkHideError();
-    const difference = checkInputs();
+    const { difference, step } = checkInputs();
     const rangeStart = document.getElementById("multiFormFirst").value;
     const rangeEnd = document.getElementById("multiFormLast").value;
 
@@ -64,6 +67,7 @@ resetButton.addEventListener("click", function(e){
     localStorage.clear();
     urlInput.value = "";
     sampleInput.value = "";
+    stepInput.value = 1;
 
 })
 
@@ -71,10 +75,11 @@ function checkInputs(){
         //check that user has filled out header form
         // if correct, send inputs to be parsed
     const url = urlInput.value.trim();
-    const sample = sampleInput.value;
-    saveToLocal(url, sample);
+    const sample = sampleInput.value.trim();
+    const step = stepInput.value.trim()
+    saveToLocal(url, sample, step);
     const difference = (url === undefined) || (sample === undefined) ? showErrorMsg() : parseInputs(url, sample);
-    return difference;
+    return { difference, step };
 }
 
 function parseInputs(url, sample){
@@ -107,9 +112,28 @@ function parseInputs(url, sample){
 };
 
 
-function constructSingleUrl(singleSample, difference){
+function constructSingleUrl(singleSample, difference, step){
+    //single sample is the sample that the user is wanting to get
+    //sampleInput is the sample for which the user has already provided a url
+    //if there is a check for every sample, we do not need to do any additional calculations besides getting the difference
+    //if there is a step between each sample, ie there is only data input for samples 1, 29, 57, 85 etc
+    //we need to find the difference between singleSample and sampleInput
     const {partid, jobid, lotid} = staticParams;
-    const newId = Number(singleSample) + Number(difference);
+    let newId;
+    if (step === 1) {
+        newId = Number(singleSample) + Number(difference);
+    }
+    if (step !== 1){
+        let count = 0;
+        if (singleSample > sampleInput){
+           for (let i of 1000) {
+               count += 1; 
+               let newNum = singleSample - stepInput;
+               newNum === sampleInput ? true : false;
+               if (true) break;
+               if (false) continue;
+        }
+    }
     const newUrl = baseUrl + `partid=${partid}` + `&instid=${newId}` +`&jobid=${jobid}`+`&lotid=${lotid}`;
     return newUrl;
 };
@@ -167,7 +191,8 @@ function checkHideError(){
 }
 
 
-function saveToLocal(url, sample){
+function saveToLocal(url, sample, step){
     localStorage.setItem('url', url);
     localStorage.setItem('sampleNum', sample);
+    localStorage.setItem('step', step);
 }
