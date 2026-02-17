@@ -1,0 +1,33 @@
+#body {
+    background-color: #30393D;
+}
+
+.output-link {
+    color: red;
+}
+
+#multiFormFirst{
+    width: 150px;
+}
+
+#multiFormLast{
+    width: 150px;
+
+}
+
+#sampleInput{
+    width: 150px;
+
+}
+
+#singleSample{
+    width: 150px;
+}
+
+#errorMsg {
+    color: red;
+}
+
+*{
+    color: white;
+}
